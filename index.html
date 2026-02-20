@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIPs by FBX - Structural Insulated Panels | Premium Building Systems</title>
+    <meta name="description" content="High-performance structural insulated panels engineered for superior energy efficiency. Custom manufacturing, nationwide delivery, expert support.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #f5f5f5;
+            --border: #2a2a2a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-cta {
+            background: var(--text-primary);
+            color: var(--bg-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--text-secondary);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(255,255,255,0.05), transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            margin-bottom: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.125rem;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-secondary);
+            background: var(--bg-card);
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--text-secondary);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Products */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: var(--text-secondary);
+            transform: translateY(-6px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product-price-note {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-specs {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .product-specs li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .product-specs li:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 500;
+        }
+
+        .spec-value {
+            color: var(--text-primary);
+        }
+
+        /* Process */
+        .process {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 4rem;
+            margin-top: 4rem;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            position: relative;
+        }
+
+        .step-number {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--border);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 6rem 0;
+            background: var(--bg-card);
+            border-radius: 24px;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 0;
+            }
+
+            .hero {
+                min-height: 80vh;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+            .stats {
+                gap: 2rem;
+            }
+
+            .process {
+                padding: 2rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">SIPs by FBX</div>
+            <a href="#apply" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Build faster.<br>Build stronger.<br>Build smarter.</h1>
+                <p class="hero-subtitle">Premium structural insulated panels engineered for superior performance. Custom manufacturing, expert support, and nationwide delivery for residential and commercial projects.</p>
+                <div class="hero-cta">
+                    <a href="#apply" class="btn btn-primary">Start Your Project</a>
+                    <a href="#products" class="btn btn-secondary">View Products</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section>
+        <div class="container">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">R-50</div>
+                    <div class="stat-label">Insulation Value</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Energy Savings</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5x</div>
+                    <div class="stat-label">Faster Installation</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Years Lifespan</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section>
+        <div class="container">
+            <h2>Engineered Excellence</h2>
+            <p style="color: var(--text-secondary); font-size: 1.25rem; max-width: 700px; margin-bottom: 2rem;">
+                High-performance building systems that outperform traditional construction in every metric.
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Superior Energy Efficiency</h3>
+                    <p>R-50 insulation value delivers up to 70% energy savings compared to conventional construction. Reduce heating and cooling costs dramatically.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏗️</div>
+                    <h3>Rapid Installation</h3>
+                    <p>Pre-fabricated panels install 5x faster than traditional framing. Reduce construction time, labor costs, and weather delays.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💪</div>
+                    <h3>Structural Strength</h3>
+                    <p>Load-bearing capability exceeds code requirements. OSB skins bonded to EPS core create exceptional strength-to-weight ratio.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Custom Engineering</h3>
+                    <p>Every panel manufactured to your exact specifications. Custom openings, dimensions, and engineering support included.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Sustainable Building</h3>
+                    <p>Reduced material waste, lower carbon footprint, and improved indoor air quality. Building green without compromise.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">✓</div>
+                    <h3>Code Compliant</h3>
+                    <p>Meets or exceeds all building codes and fire safety standards. Full engineering stamps and documentation provided.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products">
+        <div class="container">
+            <h2>Product Lineup</h2>
+            <p style="color: var(--text-secondary); font-size: 1.25rem; max-width: 700px; margin-bottom: 2rem;">
+                Three configurations designed for different applications and budgets.
+            </p>
+
+            <div class="product-grid">
+                <!-- Residential Package -->
+                <div class="product-card">
+                    <div class="product-image">🏠</div>
+                    <div class="product-content">
+                        <h3>Residential</h3>
+                        <div class="product-price">$15,000</div>
+                        <div class="product-price-note">Base package • Custom pricing available</div>
+
+                        <ul class="product-specs">
+                            <li>
+                                <span class="spec-label">Panels</span>
+                                <span class="spec-value">Wall & Roof</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">R-Value</span>
+                                <span class="spec-value">R-30 to R-50</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Thickness</span>
+                                <span class="spec-value">6" - 12"</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Best For</span>
+                                <span class="spec-value">Homes, ADUs</span>
+                            </li>
+                        </ul>
+
+                        <a href="#apply" class="btn btn-primary" style="width: 100%; text-align: center;">Configure Package</a>
+                    </div>
+                </div>
+
+                <!-- Commercial Package -->
+                <div class="product-card">
+                    <div class="product-image">🏢</div>
+                    <div class="product-content">
+                        <h3>Commercial</h3>
+                        <div class="product-price">$35,000</div>
+                        <div class="product-price-note">Base package • Custom pricing available</div>
+
+                        <ul class="product-specs">
+                            <li>
+                                <span class="spec-label">Panels</span>
+                                <span class="spec-value">Full Building</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">R-Value</span>
+                                <span class="spec-value">R-40 to R-60</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Thickness</span>
+                                <span class="spec-value">8" - 14"</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Best For</span>
+                                <span class="spec-value">Offices, Retail</span>
+                            </li>
+                        </ul>
+
+                        <a href="#apply" class="btn btn-primary" style="width: 100%; text-align: center;">Configure Package</a>
+                    </div>
+                </div>
+
+                <!-- Industrial Package -->
+                <div class="product-card">
+                    <div class="product-image">🏭</div>
+                    <div class="product-content">
+                        <h3>Industrial</h3>
+                        <div class="product-price">Custom</div>
+                        <div class="product-price-note">Quote based on project requirements</div>
+
+                        <ul class="product-specs">
+                            <li>
+                                <span class="spec-label">Panels</span>
+                                <span class="spec-value">Custom Engineered</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">R-Value</span>
+                                <span class="spec-value">R-30 to R-70</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Thickness</span>
+                                <span class="spec-value">6" - 16"</span>
+                            </li>
+                            <li>
+                                <span class="spec-label">Best For</span>
+                                <span class="spec-value">Warehouses, Facilities</span>
+                            </li>
+                        </ul>
+
+                        <a href="#apply" class="btn btn-primary" style="width: 100%; text-align: center;">Request Quote</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section>
+        <div class="container">
+            <div class="process">
+                <h2>Simple Process</h2>
+                <p style="color: var(--text-secondary); font-size: 1.125rem; margin-bottom: 2rem;">
+                    From concept to completion, we handle everything.
+                </p>
+
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">01</div>
+                        <div class="step-title">Submit Your Plans</div>
+                        <div class="step-description">Upload your building plans or sketches. Our engineering team will review and provide recommendations.</div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">02</div>
+                        <div class="step-title">Custom Engineering</div>
+                        <div class="step-description">We design and engineer every panel to your exact specifications, including all openings and custom requirements.</div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">03</div>
+                        <div class="step-title">Manufacturing</div>
+                        <div class="step-description">Panels are precision-manufactured in our facility with quality control at every step. Typical lead time: 4-6 weeks.</div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">04</div>
+                        <div class="step-title">Delivery & Support</div>
+                        <div class="step-description">Nationwide delivery with installation support. Technical assistance available throughout your project.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="apply">
+        <div class="container">
+            <div class="cta-section">
+                <h2>Ready to Build?</h2>
+                <p>Start your project with a custom quote. Our team will respond within 24 hours.</p>
+                <a href="sipsbyfbx-application.html" class="btn btn-primary" style="font-size: 1.25rem; padding: 1.25rem 2.5rem;">Start Application</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">SIPs by FBX</div>
+                <div class="footer-links">
+                    <a href="#products">Products</a>
+                    <a href="#apply">Get Started</a>
+                    <a href="mailto:david@geniinow.com">Contact</a>
+                </div>
+                <div style="color: var(--text-secondary);">
+                    © 2026 SIPs by FBX. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Application - SIPs by FBX</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #f5f5f5;
+            --border: #2a2a2a;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .form-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 3rem;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row.two-col {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        label .required {
+            color: var(--error);
+        }
+
+        input, select, textarea {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.875rem 1rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--text-secondary);
+            background: var(--bg-card);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+
+        .info-box {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .submit-section {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.125rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-dark);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .status-message {
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .status-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--bg-dark);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+
+            .form-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-row.two-col {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .radio-group, .checkbox-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">SIPs by FBX</div>
+            <h1>Project Application</h1>
+            <p class="subtitle">Tell us about your project and we'll provide a custom quote within 24 hours.</p>
+        </div>
+
+        <div id="statusMessage"></div>
+
+        <form id="applicationForm" class="form-card">
+            <!-- Contact Information -->
+            <div class="form-section">
+                <h2 class="section-title">Contact Information</h2>
+
+                <div class="form-row two-col">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-row two-col">
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="company">Company / Organization</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Details -->
+            <div class="form-section">
+                <h2 class="section-title">Project Details</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="projectType">Project Type <span class="required">*</span></label>
+                        <select id="projectType" name="projectType" required>
+                            <option value="">Select project type...</option>
+                            <option value="residential-new">Residential - New Construction</option>
+                            <option value="residential-renovation">Residential - Renovation/Addition</option>
+                            <option value="commercial-new">Commercial - New Construction</option>
+                            <option value="commercial-renovation">Commercial - Renovation</option>
+                            <option value="industrial">Industrial / Warehouse</option>
+                            <option value="agricultural">Agricultural</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row two-col">
+                    <div class="form-group">
+                        <label for="projectLocation">Project Location (City, State) <span class="required">*</span></label>
+                        <input type="text" id="projectLocation" name="projectLocation" placeholder="e.g., Denver, CO" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="squareFootage">Approximate Square Footage</label>
+                        <input type="number" id="squareFootage" name="squareFootage" placeholder="e.g., 2500">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="timeline">Expected Timeline <span class="required">*</span></label>
+                        <select id="timeline" name="timeline" required>
+                            <option value="">Select timeline...</option>
+                            <option value="1-3-months">1-3 months</option>
+                            <option value="3-6-months">3-6 months</option>
+                            <option value="6-12-months">6-12 months</option>
+                            <option value="12-months-plus">12+ months</option>
+                            <option value="planning">Still planning</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Requirements -->
+            <div class="form-section">
+                <h2 class="section-title">Panel Requirements</h2>
+
+                <div class="form-group">
+                    <label>Panels Needed <span class="required">*</span></label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="wallPanels" name="panelTypes" value="wall">
+                            <label for="wallPanels">Wall Panels</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="roofPanels" name="panelTypes" value="roof">
+                            <label for="roofPanels">Roof Panels</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="floorPanels" name="panelTypes" value="floor">
+                            <label for="floorPanels">Floor Panels</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="rValue">Preferred R-Value <span class="required">*</span></label>
+                        <select id="rValue" name="rValue" required>
+                            <option value="">Select R-value...</option>
+                            <option value="r-30">R-30 (6" panels)</option>
+                            <option value="r-40">R-40 (8" panels)</option>
+                            <option value="r-50">R-50 (10" panels)</option>
+                            <option value="r-60">R-60 (12" panels)</option>
+                            <option value="not-sure">Not sure / Need recommendation</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Do you have building plans?</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="plansYes" name="hasPlans" value="yes">
+                                <label for="plansYes">Yes, I have plans</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="plansInProgress" name="hasPlans" value="in-progress">
+                                <label for="plansInProgress">Plans in progress</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="plansNo" name="hasPlans" value="no">
+                                <label for="plansNo">No plans yet</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budget & Additional Info -->
+            <div class="form-section">
+                <h2 class="section-title">Budget & Additional Information</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="budget">Estimated Budget Range <span class="required">*</span></label>
+                        <select id="budget" name="budget" required>
+                            <option value="">Select budget range...</option>
+                            <option value="under-15k">Under $15,000</option>
+                            <option value="15k-30k">$15,000 - $30,000</option>
+                            <option value="30k-50k">$30,000 - $50,000</option>
+                            <option value="50k-100k">$50,000 - $100,000</option>
+                            <option value="100k-plus">$100,000+</option>
+                            <option value="not-sure">Not sure yet</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="additionalInfo">Project Description / Special Requirements</label>
+                        <textarea id="additionalInfo" name="additionalInfo" placeholder="Tell us more about your project, any custom requirements, or questions you have..."></textarea>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>Next Steps:</strong> Once you submit, our engineering team will review your project details and contact you within 24 hours with a preliminary quote and any follow-up questions.
+                </div>
+            </div>
+
+            <div class="submit-section">
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    Submit Application
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const ERPNEXT_URL = 'https://erpnext1.geniinow.com';
+        const ERPNEXT_API_KEY = '9c4e60fcc3a6df4';
+        const ERPNEXT_API_SECRET = '2a4729e41dcb89a';
+
+        document.getElementById('applicationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const statusMessage = document.getElementById('statusMessage');
+
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Submitting <span class="loading"></span>';
+
+            // Clear previous messages
+            statusMessage.innerHTML = '';
+
+            // Collect form data
+            const formData = new FormData(e.target);
+            const data = {};
+
+            // Standard fields
+            for (let [key, value] of formData.entries()) {
+                if (key !== 'panelTypes') {
+                    data[key] = value;
+                }
+            }
+
+            // Checkboxes (panel types)
+            const panelTypes = Array.from(document.querySelectorAll('input[name="panelTypes"]:checked'))
+                .map(cb => cb.value);
+            data.panelTypes = panelTypes.join(', ');
+
+            // Radio buttons
+            const hasPlans = document.querySelector('input[name="hasPlans"]:checked');
+            data.hasPlans = hasPlans ? hasPlans.value : 'not-specified';
+
+            try {
+                // Step 1: Create Lead in ERPNext
+                const leadResponse = await fetch(`${ERPNEXT_URL}/api/resource/Lead`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `token ${ERPNEXT_API_KEY}:${ERPNEXT_API_SECRET}`
+                    },
+                    body: JSON.stringify({
+                        lead_name: `${data.firstName} ${data.lastName}`,
+                        email_id: data.email,
+                        mobile_no: data.phone,
+                        company_name: data.company || '',
+                        source: 'Website - SIPs by FBX',
+                        status: 'Lead',
+                        notes: `
+Project Type: ${data.projectType}
+Location: ${data.projectLocation}
+Square Footage: ${data.squareFootage || 'Not specified'}
+Timeline: ${data.timeline}
+Panel Types: ${data.panelTypes}
+R-Value: ${data.rValue}
+Has Plans: ${data.hasPlans}
+Budget: ${data.budget}
+
+Additional Info:
+${data.additionalInfo || 'None provided'}
+                        `.trim()
+                    })
+                });
+
+                if (!leadResponse.ok) {
+                    throw new Error('Failed to create lead');
+                }
+
+                const leadData = await leadResponse.json();
+                console.log('Lead created:', leadData);
+
+                // Step 2: Create Quotation (optional, can be done manually later)
+                // For now, we'll just create the lead and show success
+
+                // Success!
+                statusMessage.innerHTML = `
+                    <div class="status-success">
+                        ✓ Application submitted successfully! Our team will contact you within 24 hours.
+                    </div>
+                `;
+
+                // Reset form
+                e.target.reset();
+
+                // Scroll to success message
+                statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            } catch (error) {
+                console.error('Submission error:', error);
+
+                statusMessage.innerHTML = `
+                    <div class="status-error">
+                        ✗ Submission failed. Please try again or contact us directly at david@geniinow.com
+                    </div>
+                `;
+
+                statusMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Application';
+            }
+        });
+    </script>
+</body>
+</html>
